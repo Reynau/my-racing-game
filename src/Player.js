@@ -27,6 +27,14 @@ class Player {
         return this._brake;
     }
 
+    setSteering (steering) {
+        this._steering = steering;
+    }
+
+    getSteering () {
+        return this._steering;
+    }
+
     setAngle (angle) {
         this._angle = angle;
     }
@@ -70,7 +78,6 @@ class Player {
     brake() {
         this.setSpeed(this.getSpeed() - this.getBrake());
     }
-    
 }
 
 module.exports = Player;
