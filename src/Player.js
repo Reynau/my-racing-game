@@ -75,8 +75,22 @@ class Player {
         this.setSpeed(this.getSpeed() + this.getAcceleration());
     }
 
-    brake() {
+    brake () {
         this.setSpeed(this.getSpeed() - this.getBrake());
+    }
+
+    turnRight () {
+        if (this.getSpeed() === 0) return;
+        let newAngle = this.getAngle() - this.getSteering();
+        if (newAngle < 0) newAngle = 360 + newAngle;
+        this.setAngle(newAngle);
+    }
+
+    turnLeft () {
+        if (this.getSpeed() === 0) return;
+        let newAngle = this.getAngle() + this.getSteering();
+        if (newAngle > 360) newAngle = newAngle - 360;
+        this.setAngle(newAngle);
     }
 }
 

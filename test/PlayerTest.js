@@ -126,7 +126,7 @@ describe('Player', function () {
             })
         })
 
-        describe('#accelerate()', function () {
+        describe('#accelerating', function () {
             it('should increase speed by acceleration without errors', function () {
                 let player = new Player();
                 let s = 10, a = 25;
@@ -138,7 +138,7 @@ describe('Player', function () {
             })            
         })
 
-        describe('#brake()', function () {
+        describe('#braking', function () {
             it('should decrease speed by brake value without errors', function () {
                 let player = new Player();
                 let s = 25, b = 5;
@@ -148,6 +148,48 @@ describe('Player', function () {
 
                 expect(player._speed).to.equal(s - b);
             })            
+        })
+
+        describe('#turning', function () {
+            let player = new Player();
+            player.setSpeed(25);
+            player.setAngle(0);
+            player.setSteering(15);
+
+            it('should turn right without errors', function () {
+                player.setAngle(50);
+                player.turnRight();
+                expect(player.getAngle()).to.equal(35);
+
+                player.setAngle(0);
+                player.turnRight();
+                expect(player.getAngle()).to.equal(345);
+            })
+            it('should turn left without errors', function () {
+                player.setAngle(0);
+                player.turnLeft();
+                expect(player.getAngle()).to.equal(15);
+
+                player.setAngle(355);
+                player.turnLeft();
+                expect(player.getAngle()).to.equal(10);
+            })
+            it('should not turn if stopped', function () {
+                let angleBeforeTurn, angleAfterTurn;
+                player.setSpeed(0);
+
+                angleBeforeTurn = player.getAngle();
+                player.turnLeft();
+                angleAfterTurn = player.getAngle();
+
+                expect(angleBeforeTurn).to.equal(angleAfterTurn);
+
+                angleBeforeTurn = player.getAngle();
+                player.turnRight();
+                angleAfterTurn = player.getAngle();
+
+                expect(angleBeforeTurn).to.equal(angleAfterTurn);
+            })
         })
     })
 })
