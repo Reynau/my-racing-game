@@ -7,38 +7,68 @@ class Player {
         this._y = y;
     }
 
+    getCoordinates () {
+        return {x: this._x, y: this._y};
+    }
+
     setAcceleration (acceleration) {
         this._acceleration = acceleration;
+    }
+
+    getAcceleration () {
+        return this._acceleration;
     }
 
     setBrake (brake) {
         this._brake = brake;
     }
 
+    getBrake () {
+        return this._brake;
+    }
+
     setAngle (angle) {
         this._angle = angle;
     }
 
+    getAngle () {
+        return this._angle;
+    }
+
     setSpeed (speed) {
-        this._speed = speed > this._maxSpeed ? this._maxSpeed : speed;
+        let maxSpeed = this.getMaxSpeed();
+        this._speed = speed > maxSpeed ? maxSpeed : speed;
 
         // 0 degree start at positive X
         // https://www.mathsisfun.com/algebra/trig-interactive-unit-circle.html
 
-        this._xSpeed = getRoundedSin(this._angle) * this._speed;
-        this._ySpeed = getRoundedCos(this._angle) * this._speed;
+        let angle = this.getAngle();
+        this._xSpeed = getRoundedSin(angle) * this._speed;
+        this._ySpeed = getRoundedCos(angle) * this._speed;
+    }
+
+    getSpeed () {
+        return this._speed;
+    }
+
+    getSpeedComponents () {
+        return {x: this._xSpeed, y: this._ySpeed};
     }
 
     setMaxSpeed (maxSpeed) {
         this._maxSpeed = maxSpeed;
     }
 
+    getMaxSpeed () {
+        return this._maxSpeed;
+    }
+
     accelerate () {
-        this.setSpeed(this._speed + this._acceleration);
+        this.setSpeed(this.getSpeed() + this.getAcceleration());
     }
 
     brake() {
-        this.setSpeed(this._speed - this._brake);
+        this.setSpeed(this.getSpeed() - this.getBrake());
     }
     
 }
