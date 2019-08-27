@@ -138,6 +138,17 @@ describe('Player', function () {
             })            
         })
 
+        describe('#deaccelerating', function () {
+            it('should decrease speed by friction without errors', function () {
+                let player = new Player();
+                let s = 10, d = 2;
+                player.setSpeed(s);
+                player.deaccelerate(d);
+
+                expect(player._speed).to.equal(s - d);
+            })            
+        })
+
         describe('#braking', function () {
             it('should decrease speed by brake value without errors', function () {
                 let player = new Player();

@@ -75,6 +75,10 @@ class Player {
         this.setSpeed(this.getSpeed() + this.getAcceleration());
     }
 
+    deaccelerate (friction) {
+        this.setSpeed(this.getSpeed() - friction);
+    }
+
     brake () {
         this.setSpeed(this.getSpeed() - this.getBrake());
     }
